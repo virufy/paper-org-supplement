@@ -25,7 +25,8 @@ For inquiries regarding data access for verification purposes or questions about
 
 ## Citation
 
-If you use these materials, please cite the original article. Once the article is published, we recommend citing this repository using the DOI assigned by Zenodo.
+If you use these materials, please cite the original article. We recommend citing this repository using the following DOI:
+https://doi.org/10.5281/zenodo.16737453
 
 ---
 
