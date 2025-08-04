@@ -1,0 +1,363 @@
+Loading data from: anonymized_dataset.csv 
+Successfully loaded CSV file.
+Cleaned column names.
+Filtered by consent. Rows remaining: 112 (removed 887 )
+
+Set random seed to 12345 for reproducibility.
+
+Validating indicator and outcome columns defined in mapping...
+Found 9 unique valid columns to proceed with, out of 9 items defined in mapping.
+
+Preparing 9 columns for SEM...
+Attempting to convert columns to numeric. Applying median imputation for non-numeric entries that become NA.
+
+Finished data preparation.
+Final check: Total NAs in data for SEM: 0 .
+
+--- Descriptive Statistics ---
+                                                                                                                                           vars
+To_what_extent_did_you_feel_that_there_was_clarity_in_your_purpose_for_volunteering_at_Virufy                                                 1
+To_what_extent_do_you_think_that_having_clear_consequences_for_missing_key_deadlines_is_important_for_keeping_contributors_engaged            2
+How_much_did_seeing_the_founder_Amil_working_hard_inspire_you_to_contribute_to_Virufy                                                         3
+How_much_did_seeing_your_team_lead_working_hard_inspire_you_to_contribute_to_Virufy                                                           4
+How_did_personalized_thank_you_messages_from_the_founder_and_team_leads_affect_your_commitment_to_Virufy                                      5
+How_much_did_Virufy_provide_opportunities_for_you_to_grow_as_a_professional                                                                   6
+How_much_did_opportunities_for_career_advancement_affect_your_engagement_with_Virufy                                                          7
+How_much_did_having_a_respected_job_title_impact_your_sense_of_value_at_Virufy                                                                8
+Considering_your_overall_experience_with_Virufy_how_motivated_do_you_feel_to_contribute_to_similar_organizations_or_projects_in_the_future    9
+                                                                                                                                             n
+To_what_extent_did_you_feel_that_there_was_clarity_in_your_purpose_for_volunteering_at_Virufy                                              112
+To_what_extent_do_you_think_that_having_clear_consequences_for_missing_key_deadlines_is_important_for_keeping_contributors_engaged         112
+How_much_did_seeing_the_founder_Amil_working_hard_inspire_you_to_contribute_to_Virufy                                                      112
+How_much_did_seeing_your_team_lead_working_hard_inspire_you_to_contribute_to_Virufy                                                        112
+How_did_personalized_thank_you_messages_from_the_founder_and_team_leads_affect_your_commitment_to_Virufy                                   112
+How_much_did_Virufy_provide_opportunities_for_you_to_grow_as_a_professional                                                                112
+How_much_did_opportunities_for_career_advancement_affect_your_engagement_with_Virufy                                                       112
+How_much_did_having_a_respected_job_title_impact_your_sense_of_value_at_Virufy                                                             112
+Considering_your_overall_experience_with_Virufy_how_motivated_do_you_feel_to_contribute_to_similar_organizations_or_projects_in_the_future 112
+                                                                                                                                           mean
+To_what_extent_did_you_feel_that_there_was_clarity_in_your_purpose_for_volunteering_at_Virufy                                              4.07
+To_what_extent_do_you_think_that_having_clear_consequences_for_missing_key_deadlines_is_important_for_keeping_contributors_engaged         4.01
+How_much_did_seeing_the_founder_Amil_working_hard_inspire_you_to_contribute_to_Virufy                                                      4.27
+How_much_did_seeing_your_team_lead_working_hard_inspire_you_to_contribute_to_Virufy                                                        4.05
+How_did_personalized_thank_you_messages_from_the_founder_and_team_leads_affect_your_commitment_to_Virufy                                   4.02
+How_much_did_Virufy_provide_opportunities_for_you_to_grow_as_a_professional                                                                3.88
+How_much_did_opportunities_for_career_advancement_affect_your_engagement_with_Virufy                                                       3.72
+How_much_did_having_a_respected_job_title_impact_your_sense_of_value_at_Virufy                                                             3.81
+Considering_your_overall_experience_with_Virufy_how_motivated_do_you_feel_to_contribute_to_similar_organizations_or_projects_in_the_future 4.25
+                                                                                                                                             sd
+To_what_extent_did_you_feel_that_there_was_clarity_in_your_purpose_for_volunteering_at_Virufy                                              1.00
+To_what_extent_do_you_think_that_having_clear_consequences_for_missing_key_deadlines_is_important_for_keeping_contributors_engaged         1.08
+How_much_did_seeing_the_founder_Amil_working_hard_inspire_you_to_contribute_to_Virufy                                                      0.96
+How_much_did_seeing_your_team_lead_working_hard_inspire_you_to_contribute_to_Virufy                                                        1.03
+How_did_personalized_thank_you_messages_from_the_founder_and_team_leads_affect_your_commitment_to_Virufy                                   1.15
+How_much_did_Virufy_provide_opportunities_for_you_to_grow_as_a_professional                                                                1.08
+How_much_did_opportunities_for_career_advancement_affect_your_engagement_with_Virufy                                                       1.12
+How_much_did_having_a_respected_job_title_impact_your_sense_of_value_at_Virufy                                                             1.15
+Considering_your_overall_experience_with_Virufy_how_motivated_do_you_feel_to_contribute_to_similar_organizations_or_projects_in_the_future 0.82
+                                                                                                                                           median
+To_what_extent_did_you_feel_that_there_was_clarity_in_your_purpose_for_volunteering_at_Virufy                                                   4
+To_what_extent_do_you_think_that_having_clear_consequences_for_missing_key_deadlines_is_important_for_keeping_contributors_engaged              4
+How_much_did_seeing_the_founder_Amil_working_hard_inspire_you_to_contribute_to_Virufy                                                           5
+How_much_did_seeing_your_team_lead_working_hard_inspire_you_to_contribute_to_Virufy                                                             4
+How_did_personalized_thank_you_messages_from_the_founder_and_team_leads_affect_your_commitment_to_Virufy                                        4
+How_much_did_Virufy_provide_opportunities_for_you_to_grow_as_a_professional                                                                     4
+How_much_did_opportunities_for_career_advancement_affect_your_engagement_with_Virufy                                                            4
+How_much_did_having_a_respected_job_title_impact_your_sense_of_value_at_Virufy                                                                  4
+Considering_your_overall_experience_with_Virufy_how_motivated_do_you_feel_to_contribute_to_similar_organizations_or_projects_in_the_future      4
+                                                                                                                                           min
+To_what_extent_did_you_feel_that_there_was_clarity_in_your_purpose_for_volunteering_at_Virufy                                                1
+To_what_extent_do_you_think_that_having_clear_consequences_for_missing_key_deadlines_is_important_for_keeping_contributors_engaged           1
+How_much_did_seeing_the_founder_Amil_working_hard_inspire_you_to_contribute_to_Virufy                                                        1
+How_much_did_seeing_your_team_lead_working_hard_inspire_you_to_contribute_to_Virufy                                                          1
+How_did_personalized_thank_you_messages_from_the_founder_and_team_leads_affect_your_commitment_to_Virufy                                     1
+How_much_did_Virufy_provide_opportunities_for_you_to_grow_as_a_professional                                                                  1
+How_much_did_opportunities_for_career_advancement_affect_your_engagement_with_Virufy                                                         1
+How_much_did_having_a_respected_job_title_impact_your_sense_of_value_at_Virufy                                                               1
+Considering_your_overall_experience_with_Virufy_how_motivated_do_you_feel_to_contribute_to_similar_organizations_or_projects_in_the_future   2
+                                                                                                                                           max
+To_what_extent_did_you_feel_that_there_was_clarity_in_your_purpose_for_volunteering_at_Virufy                                                5
+To_what_extent_do_you_think_that_having_clear_consequences_for_missing_key_deadlines_is_important_for_keeping_contributors_engaged           5
+How_much_did_seeing_the_founder_Amil_working_hard_inspire_you_to_contribute_to_Virufy                                                        5
+How_much_did_seeing_your_team_lead_working_hard_inspire_you_to_contribute_to_Virufy                                                          5
+How_did_personalized_thank_you_messages_from_the_founder_and_team_leads_affect_your_commitment_to_Virufy                                     5
+How_much_did_Virufy_provide_opportunities_for_you_to_grow_as_a_professional                                                                  5
+How_much_did_opportunities_for_career_advancement_affect_your_engagement_with_Virufy                                                         5
+How_much_did_having_a_respected_job_title_impact_your_sense_of_value_at_Virufy                                                               5
+Considering_your_overall_experience_with_Virufy_how_motivated_do_you_feel_to_contribute_to_similar_organizations_or_projects_in_the_future   5
+                                                                                                                                           range
+To_what_extent_did_you_feel_that_there_was_clarity_in_your_purpose_for_volunteering_at_Virufy                                                  4
+To_what_extent_do_you_think_that_having_clear_consequences_for_missing_key_deadlines_is_important_for_keeping_contributors_engaged             4
+How_much_did_seeing_the_founder_Amil_working_hard_inspire_you_to_contribute_to_Virufy                                                          4
+How_much_did_seeing_your_team_lead_working_hard_inspire_you_to_contribute_to_Virufy                                                            4
+How_did_personalized_thank_you_messages_from_the_founder_and_team_leads_affect_your_commitment_to_Virufy                                       4
+How_much_did_Virufy_provide_opportunities_for_you_to_grow_as_a_professional                                                                    4
+How_much_did_opportunities_for_career_advancement_affect_your_engagement_with_Virufy                                                           4
+How_much_did_having_a_respected_job_title_impact_your_sense_of_value_at_Virufy                                                                 4
+Considering_your_overall_experience_with_Virufy_how_motivated_do_you_feel_to_contribute_to_similar_organizations_or_projects_in_the_future     3
+                                                                                                                                            skew
+To_what_extent_did_you_feel_that_there_was_clarity_in_your_purpose_for_volunteering_at_Virufy                                              -1.15
+To_what_extent_do_you_think_that_having_clear_consequences_for_missing_key_deadlines_is_important_for_keeping_contributors_engaged         -1.04
+How_much_did_seeing_the_founder_Amil_working_hard_inspire_you_to_contribute_to_Virufy                                                      -1.46
+How_much_did_seeing_your_team_lead_working_hard_inspire_you_to_contribute_to_Virufy                                                        -0.99
+How_did_personalized_thank_you_messages_from_the_founder_and_team_leads_affect_your_commitment_to_Virufy                                   -1.17
+How_much_did_Virufy_provide_opportunities_for_you_to_grow_as_a_professional                                                                -0.77
+How_much_did_opportunities_for_career_advancement_affect_your_engagement_with_Virufy                                                       -0.84
+How_much_did_having_a_respected_job_title_impact_your_sense_of_value_at_Virufy                                                             -0.90
+Considering_your_overall_experience_with_Virufy_how_motivated_do_you_feel_to_contribute_to_similar_organizations_or_projects_in_the_future -0.87
+                                                                                                                                           kurtosis
+To_what_extent_did_you_feel_that_there_was_clarity_in_your_purpose_for_volunteering_at_Virufy                                                  0.95
+To_what_extent_do_you_think_that_having_clear_consequences_for_missing_key_deadlines_is_important_for_keeping_contributors_engaged             0.58
+How_much_did_seeing_the_founder_Amil_working_hard_inspire_you_to_contribute_to_Virufy                                                          1.99
+How_much_did_seeing_your_team_lead_working_hard_inspire_you_to_contribute_to_Virufy                                                            0.41
+How_did_personalized_thank_you_messages_from_the_founder_and_team_leads_affect_your_commitment_to_Virufy                                       0.68
+How_much_did_Virufy_provide_opportunities_for_you_to_grow_as_a_professional                                                                   -0.09
+How_much_did_opportunities_for_career_advancement_affect_your_engagement_with_Virufy                                                           0.19
+How_much_did_having_a_respected_job_title_impact_your_sense_of_value_at_Virufy                                                                 0.20
+Considering_your_overall_experience_with_Virufy_how_motivated_do_you_feel_to_contribute_to_similar_organizations_or_projects_in_the_future     0.04
+                                                                                                                                             se
+To_what_extent_did_you_feel_that_there_was_clarity_in_your_purpose_for_volunteering_at_Virufy                                              0.09
+To_what_extent_do_you_think_that_having_clear_consequences_for_missing_key_deadlines_is_important_for_keeping_contributors_engaged         0.10
+How_much_did_seeing_the_founder_Amil_working_hard_inspire_you_to_contribute_to_Virufy                                                      0.09
+How_much_did_seeing_your_team_lead_working_hard_inspire_you_to_contribute_to_Virufy                                                        0.10
+How_did_personalized_thank_you_messages_from_the_founder_and_team_leads_affect_your_commitment_to_Virufy                                   0.11
+How_much_did_Virufy_provide_opportunities_for_you_to_grow_as_a_professional                                                                0.10
+How_much_did_opportunities_for_career_advancement_affect_your_engagement_with_Virufy                                                       0.11
+How_much_did_having_a_respected_job_title_impact_your_sense_of_value_at_Virufy                                                             0.11
+Considering_your_overall_experience_with_Virufy_how_motivated_do_you_feel_to_contribute_to_similar_organizations_or_projects_in_the_future 0.08
+
+--- Normality Checks ---
+Checking for Skewness > |1.0| or Kurtosis (excess) > |3.0|...
+'To_what_extent_did_you_feel_that_there_w...': Skew=-1.15, Kurt=0.95
+  -> Potential non-normality noted for 'To_what_extent_did_you_feel_that_there_was_clarity_in_your_purpose_for_volunteering_at_Virufy'
+'To_what_extent_do_you_think_that_having_...': Skew=-1.04, Kurt=0.58
+  -> Potential non-normality noted for 'To_what_extent_do_you_think_that_having_clear_consequences_for_missing_key_deadlines_is_important_for_keeping_contributors_engaged'
+'How_much_did_seeing_the_founder_Amil_wor...': Skew=-1.46, Kurt=1.99
+  -> Potential non-normality noted for 'How_much_did_seeing_the_founder_Amil_working_hard_inspire_you_to_contribute_to_Virufy'
+'How_much_did_seeing_your_team_lead_worki...': Skew=-0.99, Kurt=0.41
+'How_did_personalized_thank_you_messages_...': Skew=-1.17, Kurt=0.68
+  -> Potential non-normality noted for 'How_did_personalized_thank_you_messages_from_the_founder_and_team_leads_affect_your_commitment_to_Virufy'
+'How_much_did_Virufy_provide_opportunitie...': Skew=-0.77, Kurt=-0.09
+'How_much_did_opportunities_for_career_ad...': Skew=-0.84, Kurt=0.19
+'How_much_did_having_a_respected_job_titl...': Skew=-0.90, Kurt=0.20
+'Considering_your_overall_experience_with...': Skew=-0.87, Kurt=0.04
+
+---> Non-normality detected. MLR estimator is appropriate.
+
+--- Scale Reliability (Cronbach's Alpha) ---
+Scale: OLS_Organizational_And_Leadership_Support (Items: 8 ) Alpha: 0.866 
+------------------------------ 
+
+--- Calculating Correlation Matrix (Plotting Skipped for Reproducibility) ---
+Correlation matrix calculated.
+
+--- Defining SEM Model Components (Single-Factor Predictor Model) ---
+Measurement model defined for: OLS_Organizational_And_Leadership_Support ( 8  items)
+Regression defined: 'Considering_your_overall_experience_with_Virufy_how_motivated_do_you_feel_to_contribute_to_similar_organizations_or_projects_in_the_future' ~ OLS_Organizational_And_Leadership_Support
+
+--- Final SEM Model Syntax --- 
+# Measurement Model
+  OLS_Organizational_And_Leadership_Support =~ To_what_extent_did_you_feel_that_there_was_clarity_in_your_purpose_for_volunteering_at_Virufy + To_what_extent_do_you_think_that_having_clear_consequences_for_missing_key_deadlines_is_important_for_keeping_contributors_engaged + How_much_did_seeing_the_founder_Amil_working_hard_inspire_you_to_contribute_to_Virufy + How_much_did_seeing_your_team_lead_working_hard_inspire_you_to_contribute_to_Virufy + How_did_personalized_thank_you_messages_from_the_founder_and_team_leads_affect_your_commitment_to_Virufy + How_much_did_Virufy_provide_opportunities_for_you_to_grow_as_a_professional + How_much_did_opportunities_for_career_advancement_affect_your_engagement_with_Virufy + How_much_did_having_a_respected_job_title_impact_your_sense_of_value_at_Virufy
+
+# Structural Model
+  Considering_your_overall_experience_with_Virufy_how_motivated_do_you_feel_to_contribute_to_similar_organizations_or_projects_in_the_future ~ OLS_Organizational_And_Leadership_Support
+-------------------------------
+
+--- Creating variable legend dataframe (Saving Skipped) ---
+Legend dataframe created internally.
+
+Fitting SEM model...
+Fitting model with 112 rows and 9 columns.
+
+--- SEM converged. ---
+
+--- SEM Summary (Fit Measures, Estimates, R-Square) ---
+lavaan 0.6-19 ended normally after 21 iterations
+
+  Estimator                                         ML
+  Optimization method                           NLMINB
+  Number of model parameters                        27
+
+  Number of observations                           112
+  Number of missing patterns                         1
+
+Model Test User Model:
+                                              Standard      Scaled
+  Test Statistic                                45.442      28.880
+  Degrees of freedom                                27          27
+  P-value (Chi-square)                           0.015       0.367
+  Scaling correction factor                                  1.573
+    Yuan-Bentler correction (Mplus variant)                       
+
+Model Test Baseline Model:
+
+  Test statistic                               445.079     284.188
+  Degrees of freedom                                36          36
+  P-value                                        0.000       0.000
+  Scaling correction factor                                  1.566
+
+User Model versus Baseline Model:
+
+  Comparative Fit Index (CFI)                    0.955       0.992
+  Tucker-Lewis Index (TLI)                       0.940       0.990
+                                                                  
+  Robust Comparative Fit Index (CFI)                         0.995
+  Robust Tucker-Lewis Index (TLI)                            0.994
+
+Loglikelihood and Information Criteria:
+
+  Loglikelihood user model (H0)              -1264.352   -1264.352
+  Scaling correction factor                                  1.284
+      for the MLR correction                                      
+  Loglikelihood unrestricted model (H1)      -1241.631   -1241.631
+  Scaling correction factor                                  1.429
+      for the MLR correction                                      
+                                                                  
+  Akaike (AIC)                                2582.704    2582.704
+  Bayesian (BIC)                              2656.104    2656.104
+  Sample-size adjusted Bayesian (SABIC)       2570.774    2570.774
+
+Root Mean Square Error of Approximation:
+
+  RMSEA                                          0.078       0.025
+  90 Percent confidence interval - lower         0.035       0.000
+  90 Percent confidence interval - upper         0.117       0.070
+  P-value H_0: RMSEA <= 0.050                    0.122       0.774
+  P-value H_0: RMSEA >= 0.080                    0.498       0.017
+                                                                  
+  Robust RMSEA                                               0.025
+  90 Percent confidence interval - lower                     0.000
+  90 Percent confidence interval - upper                     0.098
+  P-value H_0: Robust RMSEA <= 0.050                         0.633
+  P-value H_0: Robust RMSEA >= 0.080                         0.136
+
+Standardized Root Mean Square Residual:
+
+  SRMR                                           0.045       0.045
+
+Parameter Estimates:
+
+  Standard errors                             Sandwich
+  Information bread                           Observed
+  Observed information based on                Hessian
+
+Latent Variables:
+                                               Estimate  Std.Err  z-value
+  OLS_Organizational_And_Leadership_Support =~                           
+    T_____________                                1.000                  
+    T_____________                                0.798    0.161    4.960
+    H______A______                                0.875    0.168    5.208
+    H_____________                                0.861    0.164    5.250
+    H_____________                                1.049    0.143    7.328
+    H___V_________                                1.008    0.125    8.062
+    Hw___________V                                0.752    0.145    5.197
+    H_____________                                1.199    0.170    7.050
+  P(>|z|)   Std.lv  Std.all
+                           
+             0.756    0.758
+    0.000    0.603    0.562
+    0.000    0.662    0.693
+    0.000    0.651    0.636
+    0.000    0.793    0.695
+    0.000    0.762    0.707
+    0.000    0.568    0.508
+    0.000    0.907    0.791
+
+Regressions:
+                                                                                                                                              
+  Considering_your_overall_experience_with_Virufy_how_motivated_do_you_feel_to_contribute_to_similar_organizations_or_projects_in_the_future ~
+    OLS_Orgn_A_L_S                                                                                                                            
+ Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
+                                                      
+    0.798    0.114    6.985    0.000    0.603    0.737
+
+Intercepts:
+                   Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
+   .T_____________    4.071    0.094   43.198    0.000    4.071    4.082
+   .T_____________    4.009    0.101   39.534    0.000    4.009    3.736
+   .H______A______    4.268    0.090   47.337    0.000    4.268    4.473
+   .H_____________    4.054    0.097   41.851    0.000    4.054    3.955
+   .H_____________    4.018    0.108   37.247    0.000    4.018    3.519
+   .H___V_________    3.875    0.102   38.028    0.000    3.875    3.593
+   .Hw___________V    3.723    0.106   35.190    0.000    3.723    3.325
+   .H_____________    3.812    0.108   35.211    0.000    3.812    3.327
+   .C_____V_______    4.250    0.077   54.964    0.000    4.250    5.194
+
+Variances:
+                   Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
+   .T_____________    0.423    0.085    4.966    0.000    0.423    0.425
+   .T_____________    0.788    0.145    5.425    0.000    0.788    0.684
+   .H______A______    0.473    0.093    5.074    0.000    0.473    0.519
+   .H_____________    0.626    0.112    5.601    0.000    0.626    0.596
+   .H_____________    0.674    0.094    7.139    0.000    0.674    0.517
+   .H___V_________    0.582    0.125    4.645    0.000    0.582    0.501
+   .Hw___________V    0.931    0.169    5.495    0.000    0.931    0.742
+   .H_____________    0.491    0.113    4.326    0.000    0.491    0.374
+   .C_____V_______    0.306    0.059    5.163    0.000    0.306    0.456
+    OLS_Orgn_A_L_S    0.572    0.171    3.347    0.001    1.000    1.000
+
+R-Square:
+                   Estimate
+    T_____________    0.575
+    T_____________    0.316
+    H______A______    0.481
+    H_____________    0.404
+    H_____________    0.483
+    H___V_________    0.499
+    Hw___________V    0.258
+    H_____________    0.626
+    C_____V_______    0.544
+
+
+--- Key Fit Measures (Recap) ---
+                 npar          chisq.scaled             df.scaled 
+               27.000                28.880                27.000 
+        pvalue.scaled            cfi.scaled            tli.scaled 
+                0.367                 0.992                 0.990 
+         rmsea.scaled rmsea.ci.lower.scaled rmsea.ci.upper.scaled 
+                0.025                 0.000                 0.070 
+                 srmr 
+                0.045 
+
+Fit Guide (MLR):
+  Pval Chisq: >.05
+  CFI/TLI: >.90/.95
+  RMSEA: <.08/.06 (CI upper <.10)
+  SRMR: <.08
+Overall Fit: Acceptable/Good based on general guidelines.
+
+--- Regression Paths (Standardized) ---
+                                                                                                                                         lhs
+9 Considering_your_overall_experience_with_Virufy_how_motivated_do_you_feel_to_contribute_to_similar_organizations_or_projects_in_the_future
+  op                                       rhs   est    se    z pvalue std.all
+9  ~ OLS_Organizational_And_Leadership_Support 0.798 0.114 6.99      0   0.737
+
+Significant Predictors (p<0.05, Standardized Estimates):
+                                                                                                                                         lhs
+9 Considering_your_overall_experience_with_Virufy_how_motivated_do_you_feel_to_contribute_to_similar_organizations_or_projects_in_the_future
+                                        rhs   est std.all pvalue
+9 OLS_Organizational_And_Leadership_Support 0.798   0.737      0
+
+--- R-Square for Outcome ---
+R2 for 'Considering_your_overall_experience_with_Virufy_how_motivated_do_you_feel_to_contribute_to_similar_organizations_or_projects_in_the_future': 0.544
+
+--- Modification Indices --- 
+Top Modification Indices (MI > 3.84):
+                                                                                                                                  lhs
+56                           How_did_personalized_thank_you_messages_from_the_founder_and_team_leads_affect_your_commitment_to_Virufy
+38 To_what_extent_do_you_think_that_having_clear_consequences_for_missing_key_deadlines_is_important_for_keeping_contributors_engaged
+   op
+56 ~~
+38 ~~
+                                                                                     rhs
+56           How_much_did_Virufy_provide_opportunities_for_you_to_grow_as_a_professional
+38 How_much_did_seeing_the_founder_Amil_working_hard_inspire_you_to_contribute_to_Virufy
+      mi    epc sepc.lv sepc.all sepc.nox
+56 10.39 -0.221  -0.221   -0.353   -0.353
+38  5.67 -0.151  -0.151   -0.248   -0.248
+
+--- R Script Completed ---
+Statistical analysis executed.
+Correlation Matrix Calculation: Performed.
+SEM Model Fitting: Attempted and reported above.
+Figure Plotting and File Saving: Skipped as configured for reproducibility package.
