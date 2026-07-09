@@ -28,7 +28,7 @@ jobs:
           check "0.745"                        "standardized beta = 0.745 (primary 7-item model)"
           check "R2 (OLS2 excluded): 0.556"    "R-squared = 0.556 (primary 7-item model)"
           check "Alpha: 0.868"                 "Cronbach alpha = 0.868 (8-item scale)"
-          check "17.941"                       "chi-square = 17.941"
+          check "1.000        1.013        0.000        0.041" "fit indices CFI=1.000 TLI=1.013 RMSEA=0.000 SRMR=0.041 (primary model)"
           check "Rows remaining: 112"          "N = 112 after consent filtering"
           echo "All key published numbers reproduced in a clean environment."
 
