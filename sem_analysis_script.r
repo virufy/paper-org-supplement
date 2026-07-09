@@ -31,9 +31,10 @@ pacman::p_load(
 data_file <- "anonymized_dataset.csv"
 
 # --- Missing Data Handling Strategy ---
-# FIML (Full Information Maximum Likelihood) is used in lavaan for SEM fitting.
-# Note: Median imputation is applied below for non-numeric entries converting to NA,
-# but FIML handles any remaining structural or intermittent NAs during model fitting.
+# FIML (Full Information Maximum Likelihood) is used throughout.
+# Non-numeric strings are converted to NA during data preparation;
+# no imputation is applied. FIML in lavaan handles all missing values
+# during model fitting (Enders & Bandalos, 2001; Graham, 2009).
 missing_data_strategy <- "fiml"
 
 # --- 3. Helper Function: Clean Column Names ---
@@ -92,16 +93,16 @@ if (!is.na(consent_col_name_found)) {
 
 latent_variable_mapping <- list(
   'OLS_Organizational_And_Leadership_Support' = c(
-    "To_what_extent_did_you_feel_that_there_was_clarity_in_your_purpose_for_volunteering_at_Virufy",
+    "To_what_extent_did_you_feel_that_there_was_clarity_in_your_purpose_for_volunteering_at_Organization",
     "To_what_extent_do_you_think_that_having_clear_consequences_for_missing_key_deadlines_is_important_for_keeping_contributors_engaged",
-    "How_much_did_seeing_the_founder_Amil_working_hard_inspire_you_to_contribute_to_Virufy",
-    "How_much_did_seeing_your_team_lead_working_hard_inspire_you_to_contribute_to_Virufy",
-    "How_did_personalized_thank_you_messages_from_the_founder_and_team_leads_affect_your_commitment_to_Virufy",
-    "How_much_did_Virufy_provide_opportunities_for_you_to_grow_as_a_professional",
-    "How_much_did_opportunities_for_career_advancement_affect_your_engagement_with_Virufy",
-    "How_much_did_having_a_respected_job_title_impact_your_sense_of_value_at_Virufy"
+    "How_much_did_seeing_the_founder_working_hard_inspire_you_to_contribute_to_Organization",
+    "How_much_did_seeing_your_team_lead_working_hard_inspire_you_to_contribute_to_Organization",
+    "How_did_personalized_thank_you_messages_from_the_founder_and_team_leads_affect_your_commitment_to_Organization",
+    "How_much_did_Organization_provide_opportunities_for_you_to_grow_as_a_professional",
+    "How_much_did_opportunities_for_career_advancement_affect_your_engagement_with_Organization",
+    "How_much_did_having_a_respected_job_title_impact_your_sense_of_value_at_Organization"
   ),
-  'Future_Motivation_Outcome' = "Considering_your_overall_experience_with_Virufy_how_motivated_do_you_feel_to_contribute_to_similar_organizations_or_projects_in_the_future"
+  'Future_Motivation_Outcome' = "Considering_your_overall_experience_with_Organization_how_motivated_do_you_feel_to_contribute_to_similar_organizations_or_projects_in_the_future"
 )
 
 # Define shorter aliases for variables for easier plotting/reporting if needed
@@ -110,14 +111,14 @@ latent_variable_mapping <- list(
 variable_aliases <- list(
   "OLS_Organizational_And_Leadership_Support" = "Org/Lead\nSupport",
   "Future_Motivation_Outcome" = "Future\nMotivation",
-  "To_what_extent_did_you_feel_that_there_was_clarity_in_your_purpose_for_volunteering_at_Virufy" = "OLS1_Purpose",
+  "To_what_extent_did_you_feel_that_there_was_clarity_in_your_purpose_for_volunteering_at_Organization" = "OLS1_Purpose",
   "To_what_extent_do_you_think_that_having_clear_consequences_for_missing_key_deadlines_is_important_for_keeping_contributors_engaged" = "OLS2_Consequence",
-  "How_much_did_seeing_the_founder_Amil_working_hard_inspire_you_to_contribute_to_Virufy" = "OLS3_FounderInsp",
-  "How_much_did_seeing_your_team_lead_working_hard_inspire_you_to_contribute_to_Virufy" = "OLS4_LeadInsp",
-  "How_did_personalized_thank_you_messages_from_the_founder_and_team_leads_affect_your_commitment_to_Virufy" = "OLS5_Thanks",
-  "How_much_did_Virufy_provide_opportunities_for_you_to_grow_as_a_professional" = "OLS6_GrowthOpp",
-  "How_much_did_opportunities_for_career_advancement_affect_your_engagement_with_Virufy" = "OLS7_CareerOpp",
-  "How_much_did_having_a_respected_job_title_impact_your_sense_of_value_at_Virufy" = "OLS8_JobTitle"
+  "How_much_did_seeing_the_founder_working_hard_inspire_you_to_contribute_to_Organization" = "OLS3_FounderInsp",
+  "How_much_did_seeing_your_team_lead_working_hard_inspire_you_to_contribute_to_Organization" = "OLS4_LeadInsp",
+  "How_did_personalized_thank_you_messages_from_the_founder_and_team_leads_affect_your_commitment_to_Organization" = "OLS5_Thanks",
+  "How_much_did_Organization_provide_opportunities_for_you_to_grow_as_a_professional" = "OLS6_GrowthOpp",
+  "How_much_did_opportunities_for_career_advancement_affect_your_engagement_with_Organization" = "OLS7_CareerOpp",
+  "How_much_did_having_a_respected_job_title_impact_your_sense_of_value_at_Organization" = "OLS8_JobTitle"
 )
 
 
@@ -141,40 +142,49 @@ if (length(valid_cols) == 0) stop("FATAL: No valid columns found from mapping. C
 df_sem_prep <- df %>% select(all_of(valid_cols))
 cat(sprintf("\nPreparing %d columns for SEM...\n", ncol(df_sem_prep)))
 
-# Convert columns to numeric and apply median imputation for values becoming NA
-cols_to_remove <- c(); issues_found <- FALSE
-cat("Attempting to convert columns to numeric. Applying median imputation for non-numeric entries that become NA.\n")
+# Convert columns to numeric. Non-numeric entries (e.g. "N/A" strings) become NA.
+# NAs are intentionally retained and handled by FIML during model fitting.
+# No median imputation is applied, as FIML is the preferred missing-data strategy
+# (see: Enders & Bandalos, 2001; Graham, 2009).
+cols_to_remove <- c()
+cat("Converting columns to numeric. NAs retained for FIML (no imputation).\n")
 for (col in names(df_sem_prep)) {
   original_values_col <- df_sem_prep[[col]]
-  # Attempt conversion to numeric. Handle potential non-numeric entries leading to NAs.
-  numeric_col <- suppressWarnings(tryCatch(as.numeric(as.character(original_values_col)), error = function(e) { rep(NA_real_, length(original_values_col)) }))
+  numeric_col <- suppressWarnings(tryCatch(
+    as.numeric(as.character(original_values_col)),
+    error = function(e) { rep(NA_real_, length(original_values_col)) }
+  ))
   nas_from_conversion <- sum(is.na(numeric_col)) - sum(is.na(original_values_col))
-  if (nas_from_conversion > 0) { cat(sprintf("  --> Note: %d NAs from non-numeric entries in '%s'.\n", nas_from_conversion, col)) }
-
-  if (any(!is.na(numeric_col))) { # Check if there's *any* valid numeric data in the column
-      nas_to_impute_in_step <- sum(is.na(numeric_col))
-      if(nas_to_impute_in_step > 0) {
-          median_val <- median(numeric_col, na.rm = TRUE)
-          if(!is.na(median_val)) { # Check if median calculation was successful
-              numeric_col[is.na(numeric_col)] <- median_val
-              # cat(sprintf("  Imputed %d NA(s) in '%s' with median %.2f.\n", nas_to_impute_in_step, col, median_val)) # Keep this line if matching output needed
-          } else { # Median was NA (e.g., column was all NAs to begin with)
-             cat(sprintf("  --> Warn: Median NA for '%s'. Column may still contain NAs or be removed.\n", col)); issues_found <- TRUE
-          }
-      }
-      df_sem_prep[[col]] <- numeric_col # Assign the (imputed) numeric column back
-  } else { # Column became all NAs or was all NAs/non-numeric initially
+  if (nas_from_conversion > 0) {
+    cat(sprintf("  --> %d non-numeric entries converted to NA in '%s' (will be handled by FIML).\n",
+                nas_from_conversion, col))
+  }
+  if (any(!is.na(numeric_col))) {
+    df_sem_prep[[col]] <- numeric_col
+  } else {
     cols_to_remove <- c(cols_to_remove, col)
-    warning(paste0("Column '", col, "' became all NAs after attempted conversion/imputation and will be REMOVED."), immediate. = TRUE)
-    issues_found <- TRUE
+    warning(paste0("Column '", col, "' is entirely NA and will be REMOVED."), immediate. = TRUE)
   }
 }
-if (length(cols_to_remove) > 0) { df_sem <- df_sem_prep %>% select(-all_of(cols_to_remove)); cat(sprintf("Removed %d all-NA columns: %s\n", length(cols_to_remove), paste(cols_to_remove, collapse=", "))) } else { df_sem <- df_sem_prep }
-cat("\nFinished data preparation.\n"); if(issues_found){ cat("*** Review Warnings Above Carefully! ***\n") }
+if (length(cols_to_remove) > 0) {
+  df_sem <- df_sem_prep %>% select(-all_of(cols_to_remove))
+  cat(sprintf("Removed %d all-NA columns: %s\n", length(cols_to_remove), paste(cols_to_remove, collapse=", ")))
+} else {
+  df_sem <- df_sem_prep
+}
+cat("\nFinished data preparation.\n")
 
-# Note: FIML handles remaining NAs. Listwise deletion is not used for final model.
+# Report NA counts per column (FIML will handle these during model fitting)
+missing_per_col <- sapply(df_sem, function(x) sum(is.na(x)))
+missing_per_col <- missing_per_col[missing_per_col > 0]
+if (length(missing_per_col) > 0) {
+  cat("NAs present (passed to FIML):\n")
+  for (cn in names(missing_per_col)) cat(sprintf("  %s: %d NA(s)\n", cn, missing_per_col[[cn]]))
+} else {
+  cat("No NAs in prepared data.\n")
+}
 missing_after_strategy <- sum(sapply(df_sem, function(x) sum(is.na(x))))
-cat(paste("Final check: Total NAs in data for SEM:", missing_after_strategy, ".\n"))
+cat(paste("Total NAs in data for SEM:", missing_after_strategy, "(handled by FIML).\n"))
 # Ensure sufficient data for SEM
 if (ncol(df_sem) < 2 || nrow(df_sem) < 20) {
   stop(paste0("Insufficient data (Cols:", ncol(df_sem), ", Rows:", nrow(df_sem),") for SEM."))
@@ -237,13 +247,24 @@ for (latent in defined_multi_item_lvs) {
 }
 cat(paste(rep("-", 30), collapse=""), "\n")
 
-# --- Calculate Correlation Matrix (Plotting Skipped) ---
-cat("\n--- Calculating Correlation Matrix (Plotting Skipped for Reproducibility) ---\n")
+# --- Calculate Correlation Matrix ---
+cat("\n--- Correlation Matrix ---\n")
 if (ncol(df_sem) >= 2 && nrow(df_sem) > 1) {
-   cor_matrix <- cor(df_sem, use = "pairwise.complete.obs") # Keep calculation
-   # Plotting and saving commented out
-   # ... plotting code ...
+   cor_matrix <- cor(df_sem, use = "pairwise.complete.obs")
    cat("Correlation matrix calculated.\n")
+
+   # Print numeric correlation table with short aliases
+   cor_aliases <- sapply(colnames(cor_matrix), function(cn) {
+     alias <- variable_aliases[[cn]]
+     if (is.null(alias) || alias == "") substring(cn, 1, 20) else alias
+   })
+   cor_matrix_print <- cor_matrix
+   colnames(cor_matrix_print) <- cor_aliases
+   rownames(cor_matrix_print) <- cor_aliases
+   cat("\nCorrelation Matrix (pairwise complete obs, rounded to 2 dp):\n")
+   options(width = 140)
+   print(round(cor_matrix_print, 2))
+   options(width = 80)
 } else { cat("Skipping correlation matrix calculation (insufficient data).\n") }
 
 
@@ -254,8 +275,7 @@ if (! (outcome_var_name %in% names(df_sem)) ) { stop(paste("FATAL: Outcome varia
 
 # Measurement model syntax part
 measurement_model_parts <- c();
-latent_vars_in_model <- names(alpha_scores) # Assumes only scales with alpha >= 0.7 are used as LVs, or all defined LVs with >=2 items
-# In this single factor model, it should be just OLS_Organizational_And_Leadership_Support
+latent_vars_in_model <- names(alpha_scores)  # Single factor: OLS_Organizational_And_Leadership_Support
 for (latent in latent_vars_in_model) {
   indicators_defined <- latent_variable_mapping[[latent]];
   indicators_present <- indicators_defined[indicators_defined %in% colnames(df_sem)];
@@ -289,63 +309,6 @@ sem_model_string <- paste(
 cat("\n--- Final SEM Model Syntax --- \n")
 cat(sem_model_string)
 cat("\n-------------------------------\n")
-
-# --- Variable Legend (Created internally, Saving Skipped) ---
-# This section creates a dataframe mapping full variable names to aliases,
-# useful for internal checks or potentially plotting code, but the dataframe
-# is not saved to disk as part of the reproducibility output.
-cat("\n--- Creating variable legend dataframe (Saving Skipped) ---\n")
-tryCatch({
-    legend_df_list <- list();
-    used_vars <- colnames(df_sem);
-
-    # Get variable names from the defined latent_variable_mapping that are present in the data
-    all_vars_in_mapping_and_data <- unlist(latent_variable_mapping, use.names = FALSE)
-    all_vars_in_mapping_and_data <- all_vars_in_mapping_and_data[all_vars_in_mapping_and_data %in% used_vars]
-
-    for(full_name in all_vars_in_mapping_and_data) {
-        alias <- variable_aliases[[full_name]]; # Get defined alias
-        if (is.null(alias) || alias == "") alias <- substring(full_name, 1, 25); # Use start of name if no alias
-
-        var_type <- "Observed";
-        mapped_lv <- "N/A";
-
-        if (full_name == outcome_var_name) {
-            var_type <- "Outcome (in Model)";
-            mapped_lv = "Directly Included" # Clarify it's the outcome
-        } else {
-            # Check if it's an indicator for any defined latent variable
-            for (lv_name in names(latent_variable_mapping)) {
-                if (is.character(latent_variable_mapping[[lv_name]]) && full_name %in% latent_variable_mapping[[lv_name]]) {
-                    # Check if the latent variable itself is included in the model (has >= 2 indicators)
-                    if (lv_name %in% latent_vars_in_model) { # Check against LVs used in SEM syntax
-                         var_type <- "Indicator (in Model)";
-                         mapped_lv <- lv_name;
-                         break # Stop after finding the first LV it maps to
-                    } else {
-                         var_type <- "Indicator (Excluded LV)"; # Indicator but its LV was excluded
-                         mapped_lv <- lv_name;
-                         break
-                    }
-                }
-            }
-        }
-        legend_df_list[[length(legend_df_list) + 1]] <- data.frame(
-            Alias = alias,
-            Full_Variable_Name = full_name,
-            Type = var_type,
-            Mapped_Latent = mapped_lv
-        )
-    }
-    if(length(legend_df_list) > 0) {
-      legend_df <- bind_rows(legend_df_list) %>% arrange(Type, Mapped_Latent, Alias) %>% distinct();
-      # Saving commented out
-      # write.csv(legend_df, "variable_legend.csv", row.names = FALSE, quote = TRUE);
-      cat("Legend dataframe created internally.\n")
-    } else {
-      cat("No variables found to create legend dataframe.\n")
-    }
-}, error = function(e){ cat("\nError creating legend dataframe:", e$message, "\n") })
 
 
 # --- 9. Fit the SEM Model ---
@@ -460,6 +423,32 @@ if (!is.null(fit) && lavInspect(fit, "converged")) {
       cat(paste0("No Modification Indices > ", 3.84, ".\n"));
   } else { cat("Modification Index calculation failed.\n") }
 
+  # --- Convergent Validity: AVE and Composite Reliability (CR) ---
+  # AVE = mean(λ²); CR = (Σλ)² / ((Σλ)² + Σ(1−λ²))
+  # Thresholds: AVE >= 0.50, CR >= 0.70 (Fornell & Larcker, 1981; Hair et al., 2010)
+  cat("\n--- Convergent Validity: AVE and Composite Reliability (CR) ---\n")
+  tryCatch({
+    param_est_cv <- parameterEstimates(fit, standardized = TRUE)
+    lv_names_cv  <- unique(param_est_cv$lhs[param_est_cv$op == "=~"])
+    if (length(lv_names_cv) == 0) {
+      cat("No latent variable loadings found; cannot compute AVE/CR.\n")
+    } else {
+      for (lv in lv_names_cv) {
+        lambdas <- param_est_cv$std.all[param_est_cv$op == "=~" & param_est_cv$lhs == lv]
+        lambdas <- lambdas[!is.na(lambdas)]
+        if (length(lambdas) < 2) next
+        lambda2  <- lambdas^2
+        delta2   <- 1 - lambda2
+        ave      <- mean(lambda2)
+        cr       <- sum(lambdas)^2 / (sum(lambdas)^2 + sum(delta2))
+        ave_flag <- if (ave >= 0.50) "[AVE >= 0.50: OK]" else "[AVE < 0.50: concern]"
+        cr_flag  <- if (cr  >= 0.70) "[CR >= 0.70: OK]"  else "[CR < 0.70: concern]"
+        cat(sprintf("  %-45s  AVE = %.3f %s  CR = %.3f %s\n", lv, ave, ave_flag, cr, cr_flag))
+      }
+      cat("Ref: Fornell & Larcker (1981); Hair et al. (2010). Standard thresholds: AVE>=0.50, CR>=0.70.\n")
+    }
+  }, error = function(e) { cat("Error computing AVE/CR:", e$message, "\n") })
+
 } else {
     # Message if SEM fitting failed or did not converge
     if (is.null(fit)) { cat("\n--- SEM fit failed or was skipped. Check error messages above. ---\n") } else {
@@ -470,9 +459,111 @@ if (!is.null(fit) && lavInspect(fit, "converged")) {
     }
 }
 
-# --- 11. Completion Summary ---
+# --- 11. OLS2 Sensitivity Check ---
+# Re-fit SEM excluding OLS2_Consequence from the latent factor to verify that
+# main results are not driven by this item. OLS2 asks about respondents' beliefs
+# about deadline consequences, which is conceptually distinct from the direct
+# organizational support experience captured by OLS1, OLS3–OLS8.
+cat("\n--- OLS2 Sensitivity Check (Model Without OLS2_Consequence) ---\n")
+cat("Rationale: OLS2 measures beliefs about hypothetical deadline consequences,\n")
+cat("  unlike OLS1/OLS3-8 which measure direct personal support experiences.\n")
+tryCatch({
+  ols2_col <- "To_what_extent_do_you_think_that_having_clear_consequences_for_missing_key_deadlines_is_important_for_keeping_contributors_engaged"
+  if (!(ols2_col %in% names(df_sem))) {
+    cat("OLS2 column not found in data — skipping sensitivity check.\n")
+  } else if (is.null(fit) || !lavInspect(fit, "converged")) {
+    cat("Main model did not converge — skipping OLS2 sensitivity check.\n")
+  } else {
+    ols_indicators_full   <- latent_variable_mapping[["OLS_Organizational_And_Leadership_Support"]]
+    ols_indicators_no_ols2 <- ols_indicators_full[ols_indicators_full != ols2_col]
+    ols_indicators_no_ols2 <- ols_indicators_no_ols2[ols_indicators_no_ols2 %in% colnames(df_sem)]
+
+    if (length(ols_indicators_no_ols2) < 2) {
+      cat("Fewer than 2 indicators remain after removing OLS2 — cannot fit sensitivity model.\n")
+    } else {
+      sens_meas   <- paste0("  OLS_Organizational_And_Leadership_Support =~ ",
+                            paste(ols_indicators_no_ols2, collapse = " + "))
+      sens_struct <- paste0("  ", outcome_var_name, " ~ OLS_Organizational_And_Leadership_Support")
+      sens_syntax <- paste("# Measurement Model (OLS2 excluded)\n", sens_meas,
+                           "\n\n# Structural Model\n", sens_struct, sep = "")
+      cat("Sensitivity model (OLS2 excluded):\n"); cat(sens_syntax); cat("\n")
+
+      sens_ovs       <- lavaan::lavNames(sens_syntax, "ov")
+      data_for_sens  <- df_sem %>% select(where(is.numeric)) %>%
+                          select(all_of(intersect(sens_ovs, names(.))))
+
+      set.seed(12345)  # reset before sensitivity fit to match standalone sensitivity_ols2_excluded.txt
+      fit_sens <- tryCatch(
+        lavaan::sem(model = sens_syntax, data = data_for_sens,
+                    estimator = "MLR", missing = missing_data_strategy,
+                    warn = TRUE, mimic = "Mplus"),
+        error = function(e) { message("Sensitivity model error: ", e$message); NULL }
+      )
+
+      if (!is.null(fit_sens) && lavInspect(fit_sens, "converged")) {
+        cat("\n-- Sensitivity model converged. --\n")
+
+        sens_fi <- tryCatch(
+          fitMeasures(fit_sens, c("cfi.scaled","tli.scaled","rmsea.scaled","srmr")),
+          error = function(e) NULL)
+        if (!is.null(sens_fi)) { cat("Fit Indices (OLS2 excluded):\n"); print(round(sens_fi, 3)) }
+
+        sens_reg  <- parameterEstimates(fit_sens, standardized = TRUE)
+        sens_path <- sens_reg[sens_reg$op == "~", ]
+        if (nrow(sens_path) > 0) {
+          cat("\nRegression Path (OLS2 excluded):\n")
+          print(sens_path[, c("lhs","op","rhs","est","se","z","pvalue","std.all")], digits = 3)
+        }
+
+        sens_rsq <- parameterEstimates(fit_sens, rsquare = TRUE)
+        sens_r2  <- sens_rsq[sens_rsq$op == "r2" & sens_rsq$lhs == outcome_var_name, "est"]
+        if (length(sens_r2) == 1) cat(sprintf("\nR2 (OLS2 excluded): %.3f\n", sens_r2))
+
+        cat("\nConclusion: If β, p-value, R², and fit indices are similar to the full model,\n")
+        cat("  the main finding is robust to the exclusion of OLS2_Consequence.\n")
+      } else {
+        cat("Sensitivity model did not converge or failed to fit.\n")
+      }
+    }
+  }
+}, error = function(e) { cat("Error in OLS2 sensitivity check:", e$message, "\n") })
+
+
+# --- 12. WLSMV Robustness Check ---
+cat("\n--- WLSMV Robustness Check ---\n")
+cat("Note: WLSMV treats all items as ordinal/categorical. With 5-point Likert items\n")
+cat("exhibiting ceiling effects and skewness, RMSEA may be elevated relative to MLR.\n")
+cat("MLR with FIML remains the primary estimator; WLSMV is reported for completeness.\n\n")
+
+tryCatch({
+  if (!is.null(fit) && lavInspect(fit, "converged")) {
+    wlsmv_ovs  <- tryCatch(lavaan::lavNames(sem_model_string, "ov"), error = function(e) NULL)
+    if (!is.null(wlsmv_ovs)) {
+      data_wlsmv <- df_sem %>% select(where(is.numeric)) %>%
+                      select(all_of(intersect(wlsmv_ovs, names(.))))
+      fit_wlsmv <- lavaan::sem(model = sem_model_string, data = data_wlsmv,
+                               estimator = "WLSMV", ordered = TRUE,
+                               missing = "pairwise", warn = TRUE)
+      if (lavInspect(fit_wlsmv, "converged")) {
+        cat("WLSMV model converged.\n")
+        fi_w <- fitMeasures(fit_wlsmv, c("cfi.robust","tli.robust","rmsea.robust",
+                                         "rmsea.ci.lower.robust","rmsea.ci.upper.robust","srmr"))
+        cat(sprintf("CFI=%.3f, TLI=%.3f, RMSEA=%.3f [%.3f, %.3f], SRMR=%.3f\n",
+                    fi_w["cfi.robust"], fi_w["tli.robust"], fi_w["rmsea.robust"],
+                    fi_w["rmsea.ci.lower.robust"], fi_w["rmsea.ci.upper.robust"], fi_w["srmr"]))
+        pe_w      <- parameterEstimates(fit_wlsmv, standardized = TRUE)
+        struct_w  <- pe_w[pe_w$op == "~", ]
+        cat(sprintf("Structural path: b=%.3f, SE=%.3f, z=%.3f, p=%.3f, std.beta=%.3f\n",
+                    struct_w$est, struct_w$se, struct_w$z, struct_w$pvalue, struct_w$std.all))
+      } else {
+        cat("WLSMV model did not converge.\n")
+      }
+    }
+  } else {
+    cat("Skipping WLSMV check (main MLR model did not converge).\n")
+  }
+}, error = function(e) { cat("Error in WLSMV check:", e$message, "\n") })
+
+
+# --- 13. Completion ---
 cat("\n--- R Script Completed ---\n")
-cat("Statistical analysis executed.\n")
-cat("Correlation Matrix Calculation: Performed.\n")
-cat("SEM Model Fitting: Attempted and reported above.\n")
-cat("Figure Plotting and File Saving: Skipped as configured for reproducibility package.\n")
