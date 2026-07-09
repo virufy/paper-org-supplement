@@ -1,8 +1,10 @@
-# Supplementary Materials for "Structuring for Success"
+# Supplementary Materials
 
 This repository contains the statistical appendix for the paper:
 
-> **Structuring for Success: How Organizational and Leadership Support Predicts Volunteer Motivation in a Global Nonprofit Startup**
+> **Organizational and leadership support and its relationship to volunteer motivation in a remote-first nonprofit startup**
+>
+> Future Business Journal. https://doi.org/10.1186/s43093-026-00914-6
 
 ---
 
@@ -25,8 +27,8 @@ For inquiries regarding data access for verification purposes or questions about
 
 ## Citation
 
-If you use these materials, please cite the original article. We recommend citing this repository using the following DOI:
-https://doi.org/10.5281/zenodo.16737453
+If you use these materials, please cite the original article. We recommend citing this repository using the following DOI (concept DOI, resolves to the latest version):
+https://doi.org/10.5281/zenodo.16737452
 
 ---
 
