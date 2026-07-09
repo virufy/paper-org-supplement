@@ -1,5 +1,7 @@
 # Supplementary Materials
 
+[![Reproduce analysis](https://github.com/virufy/paper-org-supplement/actions/workflows/reproduce.yml/badge.svg)](https://github.com/virufy/paper-org-supplement/actions/workflows/reproduce.yml)
+
 This repository contains the statistical appendix for the paper:
 
 > **Organizational and leadership support and its relationship to volunteer motivation in a remote-first nonprofit startup**

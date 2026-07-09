@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use these materials, please cite the article below and this repository."
+title: "Supplementary materials: Organizational and leadership support and its relationship to volunteer motivation in a remote-first nonprofit startup"
+authors:
+  - family-names: Khanzada
+    given-names: Amil
+    affiliation: "University of Fukui; Virufy"
+  - family-names: Takemoto
+    given-names: Takuji
+    affiliation: "University of Fukui"
+doi: 10.5281/zenodo.16737452
+license: CC-BY-4.0
+preferred-citation:
+  type: article
+  title: "Organizational and leadership support and its relationship to volunteer motivation in a remote-first nonprofit startup"
+  authors:
+    - family-names: Khanzada
+      given-names: Amil
+    - family-names: Takemoto
+      given-names: Takuji
+  journal: "Future Business Journal"
+  year: 2026
+  doi: 10.1186/s43093-026-00914-6
