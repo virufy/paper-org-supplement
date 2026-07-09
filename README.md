@@ -24,7 +24,7 @@ Note on model labeling: the script fits the 8-item specification as its first mo
 
 The dataset above contains the item-level responses supporting the paper's quantitative analyses (descriptive statistics, correlations, factor analysis, and SEM).
 
-Demographic variables (gender, age group, ethnicity, country of residence, role, tenure) and open-ended text responses are withheld to protect participant privacy: the study organization is publicly named and the sample is small, so combinations of demographic attributes could be re-identifying. These data were collected under ethical protocols that restrict public distribution and are available from the corresponding author, Amil Khanzada, on reasonable request (contact details in the article).
+Demographic variables (gender, age group, ethnicity, country of residence, role, tenure) and open-ended text responses are withheld to protect participant privacy: the study organization is publicly named and the sample is small, so combinations of demographic attributes could be re-identifying. These data were collected under ethical protocols that restrict public distribution.
 
 ---
 
